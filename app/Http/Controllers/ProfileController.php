@@ -57,4 +57,17 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+
+    public function logoutUser(Request $request)
+    {
+        Auth::guard('web')->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        session()->flash('voice_message', 'Logout successfully!');
+        return redirect('login');
+    }
 }
